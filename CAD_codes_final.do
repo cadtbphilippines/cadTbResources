@@ -1,6 +1,6 @@
 
 use "/Users/nichelmarquez/CAD data/CAD_main.dta"
-**CAD ANALYSIS**
+*CAD ANALYSIS*
 gen str20 mtb_or_not = ""
 replace mtb_or_not = "MTB" if officialrdtresults == "MTB Trace Detected"
 replace mtb_or_not = "MTB" if officialrdtresults == "MTB detected, RIF resistance not detected (T)"
@@ -61,87 +61,87 @@ tab type mtb_or_not, row col all
 tab year mtb_or_not, row col all
 tab aiimpression mtb_or_not, row col all
 
-***Compare Sensitivity and Specificity rates between sex groups ****
-**Sensitivity under MTB groups**
-**Specificity under Not MTB group**
+*Compare Sensitivity and Specificity rates between sex groups *
+*Sensitivity under MTB groups*
+*Specificity under Not MTB group*
 tab sex
 sort mtb_or_not
 by mtb_or_not: tab sex aiimpression, all row
 
-***Compare PPV and NPV rates between sex groups ****
-**PPV under TB presumptive groups**
-**NPV under Non-suggestive group**
+*Compare PPV and NPV rates between sex groups *
+*PPV under TB presumptive groups**
+*NPV under Non-suggestive group**
 tab sex
 sort aiimpression
 by aiimpression: tab sex mtb_or_not, all row 
 
-***Compare Sensitivity and Specificity rates among age groups ****
-**Sensitivity under MTB groups**
-**Specificity under Not MTB group**
+*Compare Sensitivity and Specificity rates among age groups *
+*Sensitivity under MTB groups*
+*Specificity under Not MTB group*
 tab age_group
 sort mtb_or_not
 by mtb_or_not: tab age_group aiimpression, all col row
 
-***Compare PPV and NPV rates among age groups ****
-**PPV under TB presumptive groups**
-**NPV under Non-suggestive group**
+*Compare PPV and NPV rates among age groups *
+*PPV under TB presumptive groups*
+*NPV under Non-suggestive group*
 tab age_group
 sort aiimpression
 by aiimpression: tab age_group mtb_or_not, all row
 
-***Compare Sensitivity and Specificity rates among TB hx groups ****
-**Sensitivity under MTB groups**
-**Specificity under Not MTB group**
+*Compare Sensitivity and Specificity rates among TB hx groups *
+*Sensitivity under MTB groups*
+*Specificity under Not MTB group*
 tab previoustbtreatment
 sort mtb_or_not
 by mtb_or_not: tab previoustbtreatment aiimpression, all row
 
-***Compare PPV and NPV rates among TB hx groups ****
-**PPV under TB presumptive groups**
-**NPV under Non-suggestive group**
+*Compare PPV and NPV rates among TB hx groups *
+*PPV under TB presumptive groups*
+*NPV under Non-suggestive group*
 tab previoustbtreatment
 sort aiimpression
 by aiimpression: tab previoustbtreatment mtb_or_not, all row 
 
-***Compare Sensitivity and Specificity rates among TB symptoms groups ****
-**Sensitivity under MTB groups**
-**Specificity under Not MTB group**
+*Compare Sensitivity and Specificity rates among TB symptoms groups *
+*Sensitivity under MTB groups*
+*Specificity under Not MTB group*
 tab realpresumptivebyssx
 sort mtb_or_not
 by mtb_or_not: tab realpresumptivebyssx aiimpression, all row
 
 
-***Compare PPV and NPV rates among TB symptoms groups ****
-**PPV under TB presumptive groups**
-**NPV under Non-suggestive group**
+*Compare PPV and NPV rates among TB symptoms groups *
+*PPV under TB presumptive groups*
+*NPV under Non-suggestive group*
 tab realpresumptivebyssx
 sort aiimpression
 by aiimpression: tab realpresumptivebyssx mtb_or_not, all row 
 
-***Compare Sensitivity and Specificity rates among Population setting *type* groups ****
-**Sensitivity under MTB groups**
-**Specificity under Not MTB group**
+*Compare Sensitivity and Specificity rates among Population setting *type* groups *
+*Sensitivity under MTB groups*
+*Specificity under Not MTB group*
 tab type
 sort mtb_or_not
 by mtb_or_not: tab type aiimpression, all row
 
-***Compare PPV and NPV rates among Population setting *type* groups ****
-**PPV under TB presumptive groups**
-**NPV under Non-suggestive group**
+*Compare PPV and NPV rates among Population setting *type* groups *
+*PPV under TB presumptive groups*
+*NPV under Non-suggestive group*
 tab type
 sort aiimpression
 by aiimpression: tab type mtb_or_not, all row 
 
-***Compare Sensitivity and Specificity rates among Year groups ****
-**Sensitivity under MTB groups**
-**Specificity under Not MTB group**
+*Compare Sensitivity and Specificity rates among Year groups *
+*Sensitivity under MTB groups*
+*Specificity under Not MTB group*
 tab year
 sort mtb_or_not
 by mtb_or_not: tab year aiimpression, all row
 
-***Compare PPV and NPV rates among Year groups ****
-**PPV under TB presumptive groups**
-**NPV under Non-suggestive group**
+*Compare PPV and NPV rates among Year groups *
+*PPV under TB presumptive groups*
+*NPV under Non-suggestive group*
 tab year
 sort aiimpression
 by aiimpression: tab year mtb_or_not, all row 
@@ -248,16 +248,15 @@ di 2*[(Precision*Recall)/(Precision + Recall)]
 
 
 *For table 3 values*
-use "/Users/nichelmarquez/CAD data/diff_metrics_thresholds_overall.dta"
-use "/Users/nichelmarquez/CAD data/diff_metrics_thresholds_icf.dta"
-use "/Users/nichelmarquez/CAD data/diff_metrics_thresholds_acfcom.dta"
-use "/Users/nichelmarquez/CAD data/diff_metrics_thresholds_acfwp.dta"
+use "/Users/nichelmarquez/CAD data/diff_metrics_scores_overall.dta"
+use "/Users/nichelmarquez/CAD data/diff_metrics_scores_icf.dta"
+use "/Users/nichelmarquez/CAD data/diff_metrics_tscores_acfcom.dta"
+use "/Users/nichelmarquez/CAD data/diff_metrics_scores_acfwp.dta"
 *end*
 
  
 use "/Users/nichelmarquez/CAD data/CAD_main.dta"
-*coding for logistics*
-*Associations (OR) Between Individual Characteristics and Sensitivity*
+*Associations (OR) Between Individual Characteristics and Likelihood CAD positivity (pseudo-sensitivity)*
 gen str20 mtb_or_not = ""
 replace mtb_or_not = "MTB" if officialrdtresults == "MTB Trace Detected"
 replace mtb_or_not = "MTB" if officialrdtresults == "MTB detected, RIF resistance not detected (T)"
@@ -293,16 +292,21 @@ gen type_ref_icf = .
 replace type_ref_icf=0 if type == "ICF"
 replace type_ref_icf=1 if type == "ACF community"
 replace type_ref_icf=2 if type == "ACF WP"
-logistic aicodesen sex_ref_fem
-xi: logistic aicodesen i.age_ref_23
-logistic aicodesen prevtx_ref_no
-logistic aicodesen realssx_ref_no
-xi:logistic aicodesen i.type_ref_icf
-xi: logistic aicodesen sex_ref_fem i.age_ref_23 prevtx_ref_no realssx_ref_no i.type_ref_icf
+
+set seed 1234543
+mi set mlong
+mi register imputed prevtx_ref_no realssx_ref_no
+mi impute chained (logit) prevtx_ref_no realssx_ref_no, add(10) 
+mi estimate, or: logit  aicodesen sex_ref_fem 
+mi estimate, or: logit  aicodesen i.age_ref_23 
+mi estimate, or: logit  aicodesen  prevtx_ref_no 
+mi estimate, or: logit  aicodesen  realssx_ref_no 
+mi estimate, or: logit  aicodesen i.type_ref_icf
+mi estimate, or: logit  aicodesen sex_ref_fem i.age_ref_23 prevtx_ref_no realssx_ref_no i.type_ref_icf
 
 
 use "/Users/nichelmarquez/CAD data/CAD_main.dta"
-*Associations (OR) Between Individual Characteristics and Specificity*
+*Associations (OR) Between Individual Characteristics and Likelihood CAD negativity (pseudo-specificity)*
 gen str20 mtb_or_not = ""
 replace mtb_or_not = "MTB" if officialrdtresults == "MTB Trace Detected"
 replace mtb_or_not = "MTB" if officialrdtresults == "MTB detected, RIF resistance not detected (T)"
@@ -323,9 +327,9 @@ gen sex_ref_mal = .
 replace sex_ref_mal=0 if sex == "Male"
 replace sex_ref_mal=1 if sex == "Female"
 tab sex_ref_mal
-gen prevtx_ref_yes = .
-replace prevtx_ref_yes=1 if previoustbtreatment == "Yes"
-replace prevtx_ref_yes=0 if previoustbtreatment == "No"
+gen prevtx_ref_no = .
+replace prevtx_ref_no=1 if previoustbtreatment == "Yes"
+replace prevtx_ref_no=0 if previoustbtreatment == "No"
 gen realssx_ref_no = .
 replace realssx_ref_no=1 if realpresumptivebyssx == "Yes"
 replace realssx_ref_no=0 if realpresumptivebyssx == "No"
@@ -338,12 +342,19 @@ gen type_ref_wp = .
 replace type_ref_wp=0 if type == "ACF WP"
 replace type_ref_wp=1 if type == "ACF community"
 replace type_ref_wp=2 if type == "ICF"
-logistic aicodesen sex_ref_mal
-xi: logistic aicodespec i.age_ref_50
-logistic aicodespec prevtx_ref_yes
-logistic aicodespec realssx_ref_no
-xi:logistic aicodespec i.type_ref_wp
-xi: logistic aicodespec sex_ref_mal i.age_ref_50 prevtx_ref_yes realssx_ref_no i.type_ref_wp
+
+
+set seed 1234543
+mi set mlong
+mi register imputed prevtx_ref_no realssx_ref_no
+mi impute chained (logit) prevtx_ref_no realssx_ref_no, add(10) 
+mi estimate, or: logit  aicodespec sex_ref_mal 
+mi estimate, or: logit  aicodespec i.age_ref_50 
+mi estimate, or: logit  aicodespec  prevtx_ref_no 
+mi estimate, or: logit  aicodespec  realssx_ref_no 
+mi estimate, or: logit  aicodespec i.type_ref_wp
+mi estimate, or: logit  aicodespec sex_ref_mal i.age_ref_50 prevtx_ref_no realssx_ref_no i.type_ref_wp
+
 *end*
 
 
