@@ -233,12 +233,17 @@ diagtest aicode mtbcode if year == 2024
 use "/Users/nichelmarquez/CAD data/metrics_for_graphs.dta"
 *Graphs*
 *sensitivity and xpert saved*
-twoway line pseudosensitivity xperttestssaved, xlabel(#10) ylabel(#10) title("C. Pseudo-sensitivity vs Xpert Tests Saved", size (medium))
+label variable pseudosensitivity "Pseudo-sensitivity"
+label variable mwrdtestssaved "mWRD Tests Saved"
+twoway line pseudosensitivity mwrdtestssaved, xlabel(#10) ylabel(#10) title("C. Pseudo-sensitivity vs mWRD Tests Saved", size (medium))
 
 *PPV and xpert saved*
-twoway line ppv xperttestssaved, xlabel(#10) ylabel(#10) title("D. PPV vs Xpert Tests Saved", size (medium))
+label variable ppv "PPV"
+label variable mwrdtestssaved "mWRD Tests Saved"
+twoway line ppv mwrdtestssaved, xlabel(#10) ylabel(#10) title("D. PPV vs mWRD Tests Saved", size (medium))
 
 *NNT and threshold scores*
+label variable thresholdscores "Thrshold Scores"
 twoway line nnt thresholdscores, xlabel(#10) ylabel(#10) title("E. NNT vs Threshold Scores", size (medium))
 
 *Computation of F-score*
